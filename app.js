@@ -68,7 +68,7 @@ app.put('/students/:id',(req,res)=>{                                            
 
 });
 
-app.post(`/students`,(req,res)=>{
+app.post(`/students`,(req,res)=>{                                        //filtering the answers based on name search.
     const {name}=req.body;
     con.query(`SELECT * FROM students WHERE stu_name=$1`,[name],(err,resp)=>{
         if(!err){
@@ -79,16 +79,7 @@ app.post(`/students`,(req,res)=>{
     })
 })
 
-app.get('/students/:name',(req,res)=>{
-    const name=req.params.name;
-    con.query(`SELECT * FROM students WHERE stu_name=$1`,[name],(err,res2)=>{
-        if(!err){
-            res.send(res2.rows);
-        }else{
-            console.log(err.message);
-        }
-    })
-})
+
 
 app.delete('/students/:id',(req,res)=>{                   //delet a student
     const stid=req.params.id;
